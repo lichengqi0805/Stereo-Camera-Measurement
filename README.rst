@@ -36,3 +36,7 @@ Author: `Daniel Lee <Lee.Daniel.1986@gmail.com>`_
 .. _Stereo calibration: https://erget.wordpress.com/2014/02/28/calibrating-a-stereo-pair-with-python/
 .. _Tuning the block matcher: https://erget.wordpress.com/2014/05/02/producing-3d-point-clouds-from-stereo-photos-tuning-the-block-matcher-for-best-results/
 .. _Producing point clouds: https://erget.wordpress.com/2014/04/27/producing-3d-point-clouds-with-a-stereo-camera-in-opencv
+
+Dataset/Capture_Stereo_Data.py - Captures images from stereocamera at the same time into a dataset.
+Stereo_Calibration - Make use of the dataset to get two intrinsic matrix for stereocamera.
+test.py Unfinished Disparity map generator using SGBM algorithm.
