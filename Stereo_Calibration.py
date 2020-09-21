@@ -9,10 +9,11 @@ class StereoCalibration(object):
                          cv2.TERM_CRITERIA_MAX_ITER, 30, 0.001)
         self.criteria_cal = (cv2.TERM_CRITERIA_EPS +
                              cv2.TERM_CRITERIA_MAX_ITER, 100, 1e-5)
-
+        self.square_size = 0.0215 # unit in meters
         # prepare object points, like (0,0,0), (1,0,0), (2,0,0) ....,(6,5,0)
         self.objp = np.zeros((9*6, 3), np.float32)
-        self.objp[:, :2] = np.mgrid[0:9, 0:6].T.reshape(-1, 2)
+        self.objp[:, :2] = np.mgrid[0:9, 0:6].T.reshape(-1, 2) * self.square_size
+        
 
         # Arrays to store object points and image points from all the images.
         self.objpoints = []  # 3d point in real world space
@@ -106,5 +107,5 @@ class StereoCalibration(object):
         return camera_model
 
 if __name__ == '__main__':
-    filepath = '/home/william/Documents/Stereo_Camera_Measurement/Dataset/'
+    filepath = '/Users/William/work_space/Stereo-Camera-Measurement/Dataset/'
     cal_data = StereoCalibration(filepath)
