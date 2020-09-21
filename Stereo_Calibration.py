@@ -1,15 +1,16 @@
 import numpy as np
 import cv2
 import glob
+import os 
 
 class StereoCalibration(object):
-    def __init__(self, filepath):
+    def __init__(self, filepath, square_size):
         # termination criteria
         self.criteria = (cv2.TERM_CRITERIA_EPS +
                          cv2.TERM_CRITERIA_MAX_ITER, 30, 0.001)
         self.criteria_cal = (cv2.TERM_CRITERIA_EPS +
                              cv2.TERM_CRITERIA_MAX_ITER, 100, 1e-5)
-        self.square_size = 0.0215 # unit in meters
+        self.square_size = square_size # unit in meters
         # prepare object points, like (0,0,0), (1,0,0), (2,0,0) ....,(6,5,0)
         self.objp = np.zeros((9*6, 3), np.float32)
         self.objp[:, :2] = np.mgrid[0:9, 0:6].T.reshape(-1, 2) * self.square_size
@@ -107,5 +108,5 @@ class StereoCalibration(object):
         return camera_model
 
 if __name__ == '__main__':
-    filepath = '/Users/William/work_space/Stereo-Camera-Measurement/Dataset/'
-    cal_data = StereoCalibration(filepath)
+    filepath = os.path.join(os.getcwd(),'Dataset/')
+    cal_data = StereoCalibration(filepath, 0.215)
