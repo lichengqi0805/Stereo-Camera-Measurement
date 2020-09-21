@@ -39,4 +39,4 @@ Author: `Daniel Lee <Lee.Daniel.1986@gmail.com>`_
 
 Dataset/Capture_Stereo_Data.py - Captures images from stereocamera at the same time into a dataset.
 Stereo_Calibration - Make use of the dataset to get two intrinsic matrix for stereocamera.
-test.py Unfinished Disparity map generator using SGBM algorithm.
+test.py -  Unfinished Disparity map generator using SGBM algorithm.
