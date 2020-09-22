@@ -45,10 +45,11 @@ disparity_map = signal.medfilt(disparity_map,(3,3)) # Median Filtering
 #Show disparity map before generating 3D cloud to verify that point cloud will be usable. 
 plt.figure()
 plt.imshow(disparity_map,'summer')
-kernel = np.ones((2,2),np.uint8)  
+kernel = np.ones((5,5),np.uint8) 
 erosion = cv2.erode(disparity_map,kernel,iterations = 1)
+dilation = cv2.dilate(erosion,kernel,iterations = 1)
 plt.figure()
-plt.imshow(erosion,'summer')
+plt.imshow(dilation,'summer')
 plt.show()
 plt.close('all')
 
