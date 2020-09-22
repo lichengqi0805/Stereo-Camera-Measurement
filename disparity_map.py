@@ -85,7 +85,7 @@ def threeD(disp, Q):
 
     return targetPoint
 
-file_num = 1
+file_num = 14
 filepath = os.path.join(os.getcwd(),'Dataset/')
 imgR = cv2.imread(filepath + 'right/'+str(file_num) + '.jpeg', 0)
 imgL = cv2.imread(filepath + 'left/'+str(file_num) + '.jpeg', 0)
@@ -101,7 +101,7 @@ disp = sgbm(iml_rectified, imr_rectified)
 plt.figure()
 plt.imshow(iml_rectified)
 plt.figure()
-plt.imshow(disp, 'gray')
+plt.imshow(disp)
 plt.show()
 plt.close('all')
 target_point = threeD(disp, Q)#计算目标点的3D坐标（左相机坐标系下）

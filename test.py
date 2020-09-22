@@ -51,8 +51,8 @@ filepath = os.path.join(os.getcwd(),'Dataset/')
 #     disparity = stereo.compute(imgL,imgR)
 #     plt.imshow(disparity,'gray')
 #     plt.show()
-imgR = cv2.imread(filepath + 'right_obj/'+str(file_num) + '.jpeg', 0)
-imgL = cv2.imread(filepath + 'left_obj/'+str(file_num) + '.jpeg', 0)
+imgR = cv2.imread(filepath + 'right/'+str(file_num) + '.jpeg', 0)
+imgL = cv2.imread(filepath + 'left/'+str(file_num) + '.jpeg', 0)
 win_size = 5
 min_disp = -1
 max_disp = 63 #min_disp * 9
@@ -73,23 +73,14 @@ disparity_map = stereo.compute(imgR, imgL)
 disparity_map = signal.medfilt(disparity_map,(3,3)) # Median Filtering
 #Show disparity map before generating 3D cloud to verify that point cloud will be usable. 
 plt.figure()
-<<<<<<< HEAD
-plt.imshow(disparity_map,'summer')
-kernel = np.ones((5,5),np.uint8) 
-=======
 plt.imshow(imgL)
 plt.figure()
 plt.imshow(disparity_map,'gray')
 kernel = np.ones((2,2),np.uint8)  
->>>>>>> b238185f3f8021f71d8b628161131f21a9e7de29
 erosion = cv2.erode(disparity_map,kernel,iterations = 1)
 dilation = cv2.dilate(erosion,kernel,iterations = 1)
 plt.figure()
-<<<<<<< HEAD
-plt.imshow(dilation,'summer')
-=======
 plt.imshow(erosion,'gray')
->>>>>>> b238185f3f8021f71d8b628161131f21a9e7de29
 plt.show()
 plt.close('all')
 

@@ -22,7 +22,8 @@ class StereoCalibration(object):
         self.imgpoints_r = []  # 2d points in image plane.
 
         self.cal_path = filepath
-        self.read_images(self.cal_path)
+        self.camera_model = self.read_images(self.cal_path)
+        
 
     def read_images(self, cal_path):
         images_right = glob.glob(cal_path + 'right/*.jpeg')
@@ -73,6 +74,7 @@ class StereoCalibration(object):
             self.objpoints, self.imgpoints_r, img_shape, None, None)
 
         self.camera_model = self.stereo_calibrate(img_shape)
+        return self.camera_model
 
     def stereo_calibrate(self, dims):
         flags = 0
@@ -90,23 +92,35 @@ class StereoCalibration(object):
             self.d2, dims,
             criteria=stereocalib_criteria, flags=flags)
 
-        print('Intrinsic_mtx_1', M1)
+        print('Intrinsic_mtx_1 left', M1)
         print('dist_1', d1)
-        print('Intrinsic_mtx_2', M2)
+        print('Intrinsic_mtx_2 right', M2)
         print('dist_2', d2)
         print('R', R)
         print('T', T)
         print('E', E)
         print('F', F)
+        
+        # camera_model = {}
+        # camera_model['M1'] = M1
+        # camera_model['M2'] = M2
+        # camera_model['dist1'] = d1
+        # camera_model['dist2'] = d2
+        # camera_model['rvecs1'] = self.r1
+        # camera_model['rvecs2'] = self.r2
+        # camera_model['R'] = R
+        # camera_model['T'] = T
+        # camera_model['E'] = E
+        # camera_model['F'] = F
 
-        camera_model = dict([('M1', M1), ('M2', M2), ('dist1', d1),
-                            ('dist2', d2), ('rvecs1', self.r1),
-                            ('rvecs2', self.r2), ('R', R), ('T', T),
-                            ('E', E), ('F', F)])
+        camera_model = {'M1': M1, 'M2': M2, 'dist1': d1,
+                            'dist2': d2, 'rvecs1': self.r1,
+                            'rvecs2' : self.r2, 'R': R, 'T': T,
+                            'E': E, 'F': F}
 
-        cv2.destroyAllWindows()
         return camera_model
 
 if __name__ == '__main__':
     filepath = os.path.join(os.getcwd(),'Dataset/')
     cal_data = StereoCalibration(filepath, 0.215)
+    print(cal_data.camera_model)
