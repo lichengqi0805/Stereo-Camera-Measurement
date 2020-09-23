@@ -2,8 +2,8 @@ import cv2
 import numpy as np
 import os
 
-cap_1 = cv2.VideoCapture(1)
-cap_2 = cv2.VideoCapture(0)
+cap_1 = cv2.VideoCapture(0)
+cap_2 = cv2.VideoCapture(2)
 index = 1
 while True:
     ret_1, frame_1 = cap_1.read()
